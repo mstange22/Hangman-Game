@@ -6,7 +6,7 @@
 
 var wins = 0;
 var losses = 0;
-var guesses = 5;                
+var guesses = 6;                
 var guessedLetters = [];
 var guessesString = "";
 var emptyWord = [];
@@ -52,7 +52,7 @@ function buildEmptyWordString() {
 function reset() {
     guessedLetters = [];
     guessesString = "";
-    guesses = 5;
+    guesses = 6;
     wordToGuess = words[Math.floor(Math.random() * words.length)];
     buildEmptyWord();
     buildEmptyWordString();
@@ -63,6 +63,9 @@ function reset() {
                 "<p>Your Guesses so far: " + guessesString + "</p>";
 
     document.getElementById("status").innerHTML = html;
+
+    // reset hangman image
+    document.getElementById("hangman-image").src = "assets/images/hangman-6.png";
 
     /*** FOR DEBUGGING ONLY! ***/
     document.getElementById("welcome").innerHTML = wordToGuess;
@@ -106,6 +109,12 @@ document.onkeyup = function(event) {
             if (!wordToGuess.includes(userGuess)) {
 
                 guesses--;
+
+                var imageLink = "assets/images/hangman-";
+                imageLink = imageLink.concat(guesses);
+                imageLink = imageLink.concat(".png");
+
+                document.getElementById("hangman-image").src = imageLink;
             }
 
             // userGuess is in wordToGuess
@@ -140,7 +149,7 @@ document.onkeyup = function(event) {
 
             if (guesses === 0) {
 
-                alert("You used all of your guesses.  You lose.");
+                // alert("You used all of your guesses.  You lose.");
                 losses++;
                 reset();
             }

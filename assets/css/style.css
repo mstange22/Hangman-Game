@@ -18,3 +18,9 @@
  			font-weight: bold;
  			letter-spacing: 15px;
  		}
+
+ 		img {
+ 			display: block;
+ 			margin: auto;
+ 			width: 200px;
+ 		}
