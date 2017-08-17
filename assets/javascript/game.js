@@ -71,6 +71,20 @@ function reset() {
     document.getElementById("welcome").innerHTML = wordToGuess;
 }
 
+function waitForKey() {
+
+    document.getElementById("welcome").innerHTML = "<p>Press any key to continue</p>";
+
+    while(true) {
+
+        document.onkeyup = function(event) {
+
+            // Determines which key was pressed.
+            break;
+        };
+    }
+}
+
 buildEmptyWord();
 buildEmptyWordString();
 
@@ -149,9 +163,12 @@ document.onkeyup = function(event) {
 
             if (guesses === 0) {
 
-                // alert("You used all of your guesses.  You lose.");
                 losses++;
-                reset();
+
+                setTimeout(reset, 1000);
+
+                // alert("You used all of your guesses.  You lose.")
+                // waitForKey();
             }
         }   // letter guessed if
     }   // big else 
