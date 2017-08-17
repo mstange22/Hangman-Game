@@ -1,0 +1,20 @@
+ 		.jumbotron {
+ 			margin: 0 auto;
+ 			margin-top: 30px;
+ 			margin-bottom: 30px;
+ 			max-width: 960px;
+ 			width: 100%;
+ 			text-align: center;
+ 			border: 2px solid black;
+ 			border-radius: 5px;
+ 		}
+
+ 		.navbar-brand {
+ 			font-weight: bold;
+ 		}
+
+ 		#word-to-guess {
+ 			font-size: 48px;
+ 			font-weight: bold;
+ 			letter-spacing: 15px;
+ 		}
