@@ -4,10 +4,10 @@ body {
 
 .jumbotron {
 	margin: 0 auto;
-	margin-top: 10px;
+	margin-top: 20px;
 	margin-bottom: 30px;
 	max-width: 960px;
-	width: 100%;
+	width: 95%;
 	max-height: 95%;
 	text-align: center;
 	border: 2px solid black;
@@ -35,7 +35,10 @@ img {
 	padding-top: 60px;
 }
 
-#welcome-button {
+#button {
+	display: block;
+	margin: auto;
+	width: 90%;
 	margin-top: 15px;
 }
 
