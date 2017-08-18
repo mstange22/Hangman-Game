@@ -24,16 +24,22 @@ body {
 }
 
 img {
+	padding-top: 30px;
 	display: block;
 	margin: auto;
 	width: 200px;
 }
 
 #status {
-	padding-top: 15px;
+	padding-top: 60px;
 }
 
 #welcome-button {
 	margin-top: 15px;
+}
+
+#start-message {
+	margin-top: 20px;
+	font-weight: bold;
 }
 		

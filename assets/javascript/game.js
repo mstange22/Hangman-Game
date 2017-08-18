@@ -187,7 +187,11 @@ document.onkeyup = function(event) {
             if(!emptyWord.includes("_")) {
 
                 wins++;
-                setTimeout(reset, 1000);
+
+                var winSound = new Audio();
+                winSound.src = "assets/audio/space-ripple.wav";
+                winSound.play();
+                setTimeout(reset, 3000);
             }
 
             // Did the user lose?
@@ -195,7 +199,14 @@ document.onkeyup = function(event) {
 
                 losses++;
 
-                setTimeout(reset, 1000);
+                setTimeout(reset, 3000);
+
+                var winSound = new Audio();
+                winSound.src = "assets/audio/bell-toll.wav";
+                winSound.play();
+
+                $("#word-to-guess").html(wordToGuess);
+                // setTimeout(reset, 2500);
 
                 // alert("You used all of your guesses.  You lose.")
             }
@@ -216,10 +227,11 @@ $(document).ready(function() {
         wins = 0;
         losses = 0;
 
-        var byline = $("<h2>");
-        byline.html("- President Barack Obama");
-        $("#welcome-header").append(byline);
+        // var byline = $("<h2>");
+        // byline.html("- President Barack Obama");
+        // $("#welcome-header").append(byline);
         $("#welcome-button").html("Reset Score");
+        $("#start-message").html("Press any key to start!")
         reset();
     });
 });

@@ -6,7 +6,6 @@
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </head>
 <body>
-
     <div class="jumbotron">
         <div class="container">
             <div class="row">
@@ -18,7 +17,8 @@
                 <div class="col-md-5" id="hangman-container">
                     <img id="hangman-image" src="">
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-2" id="button-container">
+                    <p id="start-message"></p>
                     <div id="welcome-button" class="btn btn-primary btn-lg" role="button">Start Hangman</div>
                 </div>
                 <div class="col-md-5">
@@ -39,9 +39,11 @@
                     </div>
                 </div>
             </div>
-
         </div>
 	</div>
+    <audio>
+        <source src="" type="audio/mpeg">
+    </audio>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
