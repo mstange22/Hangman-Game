@@ -35,16 +35,18 @@ img {
 	padding-top: 60px;
 }
 
-#button {
-	display: block;
-	margin: auto;
-	width: 90%;
-	margin-top: 15px;
+#welcome-button {
+	background-color: #000654;
+}
+
+#welcome-button:hover {
+	background-color: #d42729;
 }
 
 #start-message {
 	margin-top: 20px;
 	font-weight: bold;
+	color: #d42729;
 }
 
 		
