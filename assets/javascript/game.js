@@ -191,24 +191,23 @@ document.onkeyup = function(event) {
                 var winSound = new Audio();
                 winSound.src = "assets/audio/space-ripple.wav";
                 winSound.play();
+
+                // pause for 3 seconds
                 setTimeout(reset, 3000);
             }
 
             // Did the user lose?
             else if (guesses === 0) {
 
-                losses++;
-
-                setTimeout(reset, 3000);
-
                 var winSound = new Audio();
                 winSound.src = "assets/audio/bell-toll.wav";
                 winSound.play();
 
-                $("#word-to-guess").html(wordToGuess);
-                // setTimeout(reset, 2500);
+                // pause for 3 seconds
+                setTimeout(reset, 4000);
 
-                // alert("You used all of your guesses.  You lose.")
+                losses++;
+                $("#word-to-guess").html(wordToGuess);
             }
         }
     }
@@ -227,9 +226,7 @@ $(document).ready(function() {
         wins = 0;
         losses = 0;
 
-        // var byline = $("<h2>");
-        // byline.html("- President Barack Obama");
-        // $("#welcome-header").append(byline);
+        $("#byline").html("- President Barack Obama");
         $("#welcome-button").html("Reset Score");
         $("#start-message").html("Press any key to start!")
         reset();
