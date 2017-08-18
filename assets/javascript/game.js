@@ -10,7 +10,6 @@ var guesses = 6;
 var guessedLetters = [];
 var guessesString = "";
 var emptyWord = [];
-var emptyWordString = "";
 var userWord = [];
 
 var letters = [ "a", "b", "c", "d", "e", "f", "g",
@@ -30,26 +29,12 @@ var words = [   "alabama", "alaska", "arizona", "arkansas", "california",
                 "vermont", "virginia", "washington", "west virginia",
                 "wisconsin", "wyoming"   ]
 
-// Choose the first word randomly
-// var wordToGuess = words[Math.floor(Math.random() * words.length)];
-
-// build text to display in the div #game
-// var initialHTML =  "<p>Wins: " + wins + "</p>" +
-//             "<p>Guesses Left: " + guesses + "</p>" +
-//             "<p>Your Guesses so far: " + guessesString + "</p>";
-
 function buildEmptyWord() {
 
     emptyWord = [];
 
     for (var i = 0; i < wordToGuess.length; i++) {
         emptyWord[i] = "_";
-    }
-}
-
-function buildEmptyWordString() {
-    for (var i = 0; i < emptyWord.length; i++) {
-        emptyWordString = emptyWordString.concat(emptyWord[i]);
     }
 }
 
@@ -68,6 +53,7 @@ function buildIndexes(guess) {
 }
 
 function handleSpaces() {
+
     if(wordToGuess.includes(" ") !== -1) {
         var indexes = buildIndexes(" ");
     }
@@ -79,41 +65,27 @@ function handleSpaces() {
 
 // reset function for new game
 function reset() {
+
     guessedLetters = [];
     guessesString = "";
     guesses = 6;
     wordToGuess = words[Math.floor(Math.random() * words.length)];
     buildEmptyWord();
     handleSpaces();
-    buildEmptyWordString();
 
     // Refresh display
     var refreshedHTML =  "<p>Wins: " + wins + "</p>" +
                             "<p>Losses: " + losses + "</p>" +
                             "<p>Guesses Left: 6</p>";
+
     $("#status").html(refreshedHTML);
     $("#guesses-used").html("<p>Your Guesses so far: </p>");
 
     // reset hangman image
     document.getElementById("hangman-image").src = "assets/images/hangman-6.png";
 
-    /*** Show the word to guess (FOR DEBUGGING ONLY!!!) ***/
-    // $("#welcome-button").html(wordToGuess);
-
     $("#word-to-guess").html(emptyWord);
 }
-
-// buildEmptyWord();
-// handleSpaces();
-// buildEmptyWordString();
-
-// $("#status").html(initialHTML);
-
-// // display emptyWord in HTML
-// $("#word-to-guess").html(emptyWord);
-
-/*** FOR DEBUGGING ONLY! ***/
-// $("#welcome-button").html(wordToGuess);
 
 // wait for any key to start
 document.onkeyup = function(event) {
@@ -188,25 +160,26 @@ document.onkeyup = function(event) {
 
                 wins++;
 
+                // pause for 3 seconds
+                setTimeout(reset, 2000);
+
                 var winSound = new Audio();
                 winSound.src = "assets/audio/space-ripple.wav";
                 winSound.play();
-
-                // pause for 3 seconds
-                setTimeout(reset, 3000);
             }
 
             // Did the user lose?
             else if (guesses === 0) {
 
+                losses++;
+                
+                // pause for 3 seconds
+                setTimeout(reset, 2000);
+
                 var winSound = new Audio();
                 winSound.src = "assets/audio/bell-toll.wav";
                 winSound.play();
 
-                // pause for 3 seconds
-                setTimeout(reset, 4000);
-
-                losses++;
                 $("#word-to-guess").html(wordToGuess);
             }
         }
@@ -229,6 +202,7 @@ $(document).ready(function() {
         $("#byline").html("- President Barack Obama");
         $("#welcome-button").html("Reset Score");
         $("#start-message").html("Press any key to start!")
+
         reset();
     });
 });
