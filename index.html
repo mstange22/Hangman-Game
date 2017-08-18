@@ -8,24 +8,40 @@
 <body>
 
     <div class="jumbotron">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 id="welcome-header">We are not just a collection of red states and blue states...</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5" id="hangman-container">
+                    <img id="hangman-image" src="">
+                </div>
+                <div class="col-md-2">
+                    <div id="welcome-button" class="btn btn-primary btn-lg" role="button">Start Hangman</div>
+                </div>
+                <div class="col-md-5">
+                    <div id="status">
+                    <!-- Game code will be inserted here -->
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 id="guesses-used"></h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="word-to-guess">
+                    <!-- Game code will be inserted here -->
+                    </div>
+                </div>
+            </div>
 
-        <h1>Hangman!</h1>
-		
-        <div id="welcome">
-            <p>Press any key to get started!</p>
-        </div>
-		
-		<div id="status">
-            <!-- Game code will be inserted here -->
-		</div>
-        <br>
-        <br>
-        <div id="word-to-guess">
-            <!-- Game code will be inserted here -->
         </div>
 	</div>
-    
-    <img id="hangman-image" src="assets/images/hangman-6.png">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

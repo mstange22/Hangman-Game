@@ -1,26 +1,39 @@
- 		.jumbotron {
- 			margin: 0 auto;
- 			margin-top: 30px;
- 			margin-bottom: 30px;
- 			max-width: 960px;
- 			width: 100%;
- 			text-align: center;
- 			border: 2px solid black;
- 			border-radius: 5px;
- 		}
+body {
+	background-image: url("../images/flag-background.jpg");
+}
 
- 		.navbar-brand {
- 			font-weight: bold;
- 		}
+.jumbotron {
+	margin: 0 auto;
+	margin-top: 10px;
+	margin-bottom: 30px;
+	max-width: 960px;
+	width: 100%;
+	text-align: center;
+	border: 2px solid black;
+	border-radius: 5px;
+}
 
- 		#word-to-guess {
- 			font-size: 48px;
- 			font-weight: bold;
- 			letter-spacing: 15px;
- 		}
+.navbar-brand {
+	font-weight: bold;
+}
 
- 		img {
- 			display: block;
- 			margin: auto;
- 			width: 200px;
- 		}
+#word-to-guess {
+	font-size: 48px;
+	font-weight: bold;
+	letter-spacing: 15px;
+}
+
+img {
+	display: block;
+	margin: auto;
+	width: 200px;
+}
+
+#status {
+	padding-top: 15px;
+}
+
+#welcome-button {
+	margin-top: 15px;
+}
+		

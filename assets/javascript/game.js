@@ -19,7 +19,7 @@ var letters = [ "a", "b", "c", "d", "e", "f", "g",
                 "v", "w", "x", "y", "z" ];
 
 var words = [   "alabama", "alaska", "arizona", "arkansas", "california",
-                "colorado", "connecticut", "delaware", "florida", "georgeia",
+                "colorado", "connecticut", "delaware", "florida", "georgia",
                 "hawaii", "idaho", "illinois", "indiana", "iowa", "kansas",
                 "kentucky", "louisiana", "maine", "maryland", "massachusetts",
                 "michigan", "minnesota", "mississippi", "missouri", "montana",
@@ -31,7 +31,12 @@ var words = [   "alabama", "alaska", "arizona", "arkansas", "california",
                 "wisconsin", "wyoming"   ]
 
 // Choose the first word randomly
-var wordToGuess = words[Math.floor(Math.random() * words.length)];
+// var wordToGuess = words[Math.floor(Math.random() * words.length)];
+
+// build text to display in the div #game
+// var initialHTML =  "<p>Wins: " + wins + "</p>" +
+//             "<p>Guesses Left: " + guesses + "</p>" +
+//             "<p>Your Guesses so far: " + guessesString + "</p>";
 
 function buildEmptyWord() {
 
@@ -48,6 +53,30 @@ function buildEmptyWordString() {
     }
 }
 
+function buildIndexes(guess) {
+
+    var arrayOfIndexes = [];
+
+    for (var i = 0; i < wordToGuess.length; i++) {
+
+        if(wordToGuess.charAt(i) === guess) {
+            arrayOfIndexes.push(i)
+        }
+    }
+
+    return (arrayOfIndexes);
+}
+
+function handleSpaces() {
+    if(wordToGuess.includes(" ") !== -1) {
+        var indexes = buildIndexes(" ");
+    }
+
+    for(var i = 0; i < indexes.length; i++) {
+        emptyWord[indexes[i]] = " ";
+    }
+}
+
 // reset function for new game
 function reset() {
     guessedLetters = [];
@@ -55,51 +84,36 @@ function reset() {
     guesses = 6;
     wordToGuess = words[Math.floor(Math.random() * words.length)];
     buildEmptyWord();
+    handleSpaces();
     buildEmptyWordString();
 
     // Refresh display
-    var html =  "<p>Wins: " + wins + "</p>" +
-                "<p>Guesses Left: " + guesses + "</p>" +
-                "<p>Your Guesses so far: " + guessesString + "</p>";
-
-    document.getElementById("status").innerHTML = html;
+    var refreshedHTML =  "<p>Wins: " + wins + "</p>" +
+                            "<p>Losses: " + losses + "</p>" +
+                            "<p>Guesses Left: 6</p>";
+    $("#status").html(refreshedHTML);
+    $("#guesses-used").html("<p>Your Guesses so far: </p>");
 
     // reset hangman image
     document.getElementById("hangman-image").src = "assets/images/hangman-6.png";
 
-    /*** FOR DEBUGGING ONLY! ***/
-    document.getElementById("welcome").innerHTML = wordToGuess;
+    /*** Show the word to guess (FOR DEBUGGING ONLY!!!) ***/
+    // $("#welcome-button").html(wordToGuess);
+
+    $("#word-to-guess").html(emptyWord);
 }
 
-function waitForKey() {
+// buildEmptyWord();
+// handleSpaces();
+// buildEmptyWordString();
 
-    document.getElementById("welcome").innerHTML = "<p>Press any key to continue</p>";
+// $("#status").html(initialHTML);
 
-    while(true) {
-
-        document.onkeyup = function(event) {
-
-            // Determines which key was pressed.
-            break;
-        };
-    }
-}
-
-buildEmptyWord();
-buildEmptyWordString();
-
-// build text to display in the div #game
-var html =  "<p>Wins: " + wins + "</p>" +
-            "<p>Guesses Left: " + guesses + "</p>" +
-            "<p>Your Guesses so far: " + guessesString + "</p>";
-
-document.getElementById("status").innerHTML = html;
-
-// display emptyWord in HTML
-document.getElementById("word-to-guess").innerHTML = emptyWordString;
+// // display emptyWord in HTML
+// $("#word-to-guess").html(emptyWord);
 
 /*** FOR DEBUGGING ONLY! ***/
-document.getElementById("welcome").innerHTML = wordToGuess;
+// $("#welcome-button").html(wordToGuess);
 
 // wait for any key to start
 document.onkeyup = function(event) {
@@ -134,9 +148,16 @@ document.onkeyup = function(event) {
             // userGuess is in wordToGuess
             else {
 
-                // do {
+                // get indexes of occurrences of userGuess in wordToGuess
+                var indexes = buildIndexes(userGuess); 
 
-                // } while ( );
+                // use indexes to update the emptyWord array
+                for(i = 0; i < indexes.length; i++) {
+                    emptyWord[indexes[i]] = userGuess;
+                }
+
+                // overwrite the emptyWord
+                $("#word-to-guess").html(emptyWord);
 
             }
 
@@ -154,22 +175,51 @@ document.onkeyup = function(event) {
             guessesString = guessesString.concat(userGuess);
 
             // build text to display in the div #game
-            var html =  "<p>Wins: " + wins + "</p>" +
-                        "<p>Guesses Left: " + guesses + "</p>" +
-                        "<p>Your Guesses so far: " + guessesString + "</p>";
+            var updatedHTML =  "<p>Wins: " + wins + "</p>" +
+                                "<p>Losses: " + losses + "</p>" +
+                                "<p>Guesses Left: " + guesses + "</p>";
 
-            document.getElementById("status").innerHTML = html;
+            $("#status").html(updatedHTML);
+            $("#guesses-used").html("<p>Your Guesses so far: " +
+                                        guessesString + "</p>");
 
+            // If there are no more "_" characters in emptyWord, WINNER!!!
+            if(!emptyWord.includes("_")) {
 
-            if (guesses === 0) {
+                wins++;
+                setTimeout(reset, 1000);
+            }
+
+            // Did the user lose?
+            else if (guesses === 0) {
 
                 losses++;
 
                 setTimeout(reset, 1000);
 
                 // alert("You used all of your guesses.  You lose.")
-                // waitForKey();
             }
-        }   // letter guessed if
-    }   // big else 
+        }
+    }
 };
+
+/*
+ * Initialization methods
+ */
+$(document).ready(function() {
+
+    $("#welcome-button").on("click", function () {
+
+        $("#welcome-header").html("...We are the <i>UNITED</i> States!");
+        document.getElementById("hangman-image").src = "assets/images/hangman-6.png";
+
+        wins = 0;
+        losses = 0;
+
+        var byline = $("<h2>");
+        byline.html("- President Barack Obama");
+        $("#welcome-header").append(byline);
+        $("#welcome-button").html("Reset Score");
+        reset();
+    });
+});
